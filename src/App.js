@@ -268,7 +268,7 @@ function App() {
         addUserMessage(input);
       }
   
-      const response = await axios.post('https://chatbotbackend-drab.vercel.app/send-message', {
+      const response = await axios.post('https://chatbotbackend-delta.vercel.app/send-message', {
         recentMessage: chatMessages.length > 0 ? chatMessages[chatMessages.length - 1].message : null,
         currentMessage: input,
       });
