@@ -1,38 +1,116 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: #333333; /* Changed to gray background */
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.heading {
+  position: sticky;
+  top: 0;
+  background: #333333; /* Same as body background */
+  z-index: 999; /* Ensure heading stays above other content */
+  width: 100%;
+  padding: 1rem 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.heading h1 {
+  margin: 0;
+  font-size: 4rem; /* Adjust heading font size */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Ensure main content and heading stack vertically */
+}
+
+.main {
+  flex: 1; /* Fill remaining space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem; /* Adjust spacing */
+}
+
+.chats {
+  overflow: hidden; /* Hide overflow */
+  width: 100%;
+  max-width: 70rem;
+  flex-grow: 1; /* Allow chats to expand */
+}
+
+
+.chatFooter {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  position: sticky;
+  bottom: 0; /* Stick to the bottom */
+  background: #333333; /* Same as body background */
+  z-index: 999; /* Ensure footer stays above other content */
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.inp {
+  padding: 0.5rem;
+  background: rgba(28, 30, 58, 1);
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 68rem;
+}
+
+.inp > input {
+  flex: 1; 
+  outline: none;
+  padding: 1.25rem;
   color: white;
+  border: none;
+  background: transparent;
 }
 
-.App-link {
-  color: #61dafb;
+.inp > .send {
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chat {
+  margin: 1rem;
+  padding: 2rem 3rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  text-align: justify;
+}
+
+.bot {
+  background: rgba(28, 30, 58, 1);
+  width: fit-content;
+  border-radius: 0.5rem;
+}
+
+.chatimg {
+  object-fit: cover;
+  width: 4rem;
+  margin-right: 2rem;
+  border-radius: 0.5rem;
+}
+.subtitle{
+  font-size: 16px;
 }
