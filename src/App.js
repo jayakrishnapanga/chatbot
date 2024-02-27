@@ -238,7 +238,7 @@ import addBtn from './assets/add-30.png';
 import messageicon from './assets/message.svg';
 import helpimg from'./assets/helpimg.jpeg';
 import profile from './assets/user-profile-icon.jpeg'
-import loader from './assets/ben-redblock-loading.gif'; // Import loader image
+import loader from './assets/ben-redblock-loading.gif'; 
 
 function App() {
   const [input, setInput] = useState('');
@@ -268,7 +268,7 @@ function App() {
         addUserMessage(input);
       }
   
-      const response = await axios.post('https://chatbotbackend-delta.vercel.app/send-message', {
+      const response = await axios.post('https://cbapi-kappa.vercel.app/send-message', {
         recentMessage: chatMessages.length > 0 ? chatMessages[chatMessages.length - 1].message : null,
         currentMessage: input,
       });
@@ -302,7 +302,7 @@ function App() {
       
           {loading && (
             <div className="chat bot">
-              <img src={loader} alt="Loading..." className="chatimg" /> {/* Display loader */}
+              <img src={loader} alt="Loading..." className="chatimg" />
             </div>
           )}
         </div>
