@@ -243,10 +243,9 @@ import loader from './assets/ben-redblock-loading.gif';
 function App() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false); 
   const [question, setQuestion] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
-  const messagesEndRef = useRef(null); 
+  const messagesEndRef = useRef(null); // Ref for the end of the messages container
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -254,7 +253,7 @@ function App() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatMessages]); 
+  }, [chatMessages]); // Scroll to bottom whenever chatMessages change
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -267,13 +266,11 @@ function App() {
   const addBotMessage = (response) => {
     const messageContent = response.success ? response.message : "Error: Unable to fetch response";
     setChatMessages((prevMessages) => [...prevMessages, { sender: 'bot', message: messageContent }]);
-    setButtonDisabled(false); 
   };
   
   const handleSend = async () => {
     setInput('');
     setLoading(true);
-    setButtonDisabled(true); 
   
     try {
       
@@ -310,7 +307,7 @@ function App() {
               <p className="text">{chat.message}</p>
             </div>
           ))}
-          <div ref={messagesEndRef} />
+          <div ref={messagesEndRef} /> {/* Empty div for scrolling */}
           {loading && (
             <div className="chat bot">
               <img src={loader} alt="Loading..." className="chatimg" />
@@ -330,7 +327,7 @@ function App() {
                 }
               }} 
             />
-            <button className="send" onClick={handleSend} disabled={buttonDisabled}>
+            <button className="send" onClick={handleSend}>
               <img src={sendbtn} alt="send" />
             </button>
           </div>
@@ -341,7 +338,6 @@ function App() {
 }
 
 export default App;
-
 
 
 
