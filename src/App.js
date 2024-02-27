@@ -227,7 +227,7 @@
 
 // export default App;
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import userIcon from './assets/user-icon.png';
@@ -243,8 +243,18 @@ import loader from './assets/ben-redblock-loading.gif';
 function App() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false); 
   const [question, setQuestion] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
+  const messagesEndRef = useRef(null); 
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatMessages]); 
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -257,10 +267,13 @@ function App() {
   const addBotMessage = (response) => {
     const messageContent = response.success ? response.message : "Error: Unable to fetch response";
     setChatMessages((prevMessages) => [...prevMessages, { sender: 'bot', message: messageContent }]);
+    setButtonDisabled(false); 
   };
   
   const handleSend = async () => {
+    setInput('');
     setLoading(true);
+    setButtonDisabled(true); 
   
     try {
       
@@ -284,22 +297,20 @@ function App() {
   };
   
   return (
-
-    
     <div className="App">
       <div className="heading">
-      <h1>Rikpal</h1>
-      <p className='subtitle'>I am here to help you and provide assistance</p>
-    </div>
+        <h1>Rikpal</h1>
+        <p className='subtitle'>I am here to help you and provide assistance</p>
+      </div>
       <div className="main">
         <div className="chats">
           {chatMessages.map((chat, index) => (
             <div key={index} className={`chat ${chat.sender}`}>
-              <img src={chat.sender === 'user' ? profile: helpimg} className="chatimg" alt="" />
+              <img src={chat.sender === 'user' ? profile : helpimg} className="chatimg" alt="" />
               <p className="text">{chat.message}</p>
             </div>
           ))}
-      
+          <div ref={messagesEndRef} />
           {loading && (
             <div className="chat bot">
               <img src={loader} alt="Loading..." className="chatimg" />
@@ -308,30 +319,29 @@ function App() {
         </div>
         <div className="chatFooter">
           <div className="inp">
-            {/* <input type="text" placeholder="Send a message" value={input} onChange={handleInputChange} /> */}
             <input 
-  type="text" 
-  placeholder="Send me  a message" 
-  value={input} 
-  onChange={handleInputChange} 
-  onKeyDown={(event) => {
-    if (event.key === 'Enter') {
-      handleSend();
-    }
-  }} 
-/>
-            <button className="send" onClick={handleSend}>
+              type="text" 
+              placeholder="Send me a message" 
+              value={input} 
+              onChange={handleInputChange} 
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  handleSend();
+                }
+              }} 
+            />
+            <button className="send" onClick={handleSend} disabled={buttonDisabled}>
               <img src={sendbtn} alt="send" />
             </button>
           </div>
-          {/* <p>Rikpal is here to help you and provide assistance</p> */}
         </div>
       </div>
     </div>
-
   );
 }
 
 export default App;
+
+
 
 
