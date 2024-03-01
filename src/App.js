@@ -278,7 +278,7 @@ function App() {
         addUserMessage(input);
       }
   
-      const response = await axios.post('https://cbapi-kappa.vercel.app/send-message', {
+      const response = await axios.post('http://localhost:3001/send-message', {
         recentMessage: chatMessages.length > 0 ? chatMessages[chatMessages.length - 1].message : null,
         currentMessage: input,
       });
@@ -307,7 +307,7 @@ function App() {
               <p className="text">{chat.message}</p>
             </div>
           ))}
-          <div ref={messagesEndRef} /> {/* Empty div for scrolling */}
+          <div ref={messagesEndRef} /> 
           {loading && (
             <div className="chat bot">
               <img src={loader} alt="Loading..." className="chatimg" />

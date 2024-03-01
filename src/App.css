@@ -15,7 +15,7 @@ body {
 }
 
 .heading {
-  position: sticky;
+  position:fixed;
   top: 0;
   background: #333333; /* Same as body background */
   z-index: 999; /* Ensure heading stays above other content */
@@ -34,17 +34,17 @@ body {
   display: flex;
   flex-direction: column; /* Ensure main content and heading stack vertically */
 }
-
 .main {
-  flex: 1; /* Fill remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem; /* Adjust spacing */
+  padding: 10rem 1rem 6rem; 
+  z-index: 1; 
 }
 
 .chats {
-  overflow: hidden; /* Hide overflow */
+  overflow: hidden; 
   width: 100%;
   max-width: 70rem;
   flex-grow: 1; /* Allow chats to expand */
@@ -56,12 +56,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: sticky;
+  position: fixed;
   bottom: 0; /* Stick to the bottom */
   background: #333333; /* Same as body background */
   z-index: 999; /* Ensure footer stays above other content */
   width: 100%;
   padding: 1rem 0;
+  /* margin-top: 500px; */
   text-align: center;
 }
 
